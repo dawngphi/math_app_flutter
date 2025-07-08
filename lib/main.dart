@@ -5,6 +5,8 @@ import 'package:math_app/src/pages/create_profile_pages/create_profile_age_page.
 import 'package:math_app/src/pages/create_profile_pages/create_profile_gender_page.dart';
 import 'package:math_app/src/pages/create_profile_pages/create_profile_notify_page.dart';
 import 'package:math_app/src/pages/create_profile_pages/create_profile_splash_page.dart';
+import 'package:math_app/src/pages/home_pages/home_page.dart';
+import 'package:math_app/src/pages/splash_pages/splash_page.dart';
 
 void main() {
   runApp(BlocProvider(
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home:  CreateProfileGenderPage(),
+      home:  CreateProfileSplashPage(),
     );
   }
 }

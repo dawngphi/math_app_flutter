@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../blocs/user_profile_bloc/profile_bloc.dart';
+import '../../database/user_database.dart';
+import '../../models/user_profile_model.dart';
 import '../splash_pages/splash_page.dart';
 
 class CreateProfileSplashPage extends StatefulWidget {
+  const CreateProfileSplashPage({super.key});
+
   @override
   _CreateProfileSplashPageState createState() => _CreateProfileSplashPageState();
 }
@@ -10,13 +16,23 @@ class _CreateProfileSplashPageState extends State<CreateProfileSplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 10), () {
+    _saveUserProfile();
+    Future.delayed(Duration(seconds: 5), () {
       if (mounted) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => SplashPage()),
         );
       }
     });
+  }
+  Future<void> _saveUserProfile() async {
+    final profileState = context.read<ProfileBloc>().state;
+    final userProfile = UserProfileModel(
+      gender: profileState.gender ?? '',
+      ageRange: profileState.ageRange ?? '',
+      notificationsEnabled: profileState.notificationsEnabled ?? false,
+    );
+    await UserDatabase.instance.createUser(userProfile);
   }
 
   @override
