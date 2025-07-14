@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../blocs/user_profile_bloc/profile_event.dart';
 import '../../blocs/user_profile_bloc/profile_state.dart';
@@ -46,7 +47,7 @@ class CreateProfileNotifyPage extends StatelessWidget {
                   "Skips this now",
                   style: TextStyle(
                     fontFamily: 'Fredoka',
-                    fontSize: 20,
+                    fontSize: 20.sp,
                     fontWeight: FontWeight.w400,
                     color: Color(0xFF003384),
                     decoration: TextDecoration.underline,
@@ -59,46 +60,46 @@ class CreateProfileNotifyPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          padding: EdgeInsets.fromLTRB(16.w, 24.h, 16.w, 180.h),
           child: Column(
             children: [
               Text(
                 "Create Profile",
                 style: TextStyle(
                   fontFamily: 'Fredoka',
-                  fontSize: 36,
+                  fontSize: 36.sp,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF3AAFFF),
                 ),
               ),
-              SizedBox(height: 10),
-              Image.asset("assets/images/step_icon_3.png", width: 280),
-              SizedBox(height: 30),
+              SizedBox(height: 10.h),
+              Image.asset("assets/images/step_icon_3.png", width: 280.w),
+              SizedBox(height: 30.h),
               Image.asset("assets/images/image_math_2.png"),
-              SizedBox(height: 40),
+              SizedBox(height: 40.h),
               Text(
                 "Notifications",
                 style: TextStyle(
                   fontFamily: 'Fredoka',
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF003384),
                 ),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 10.h),
               ...features.map(
                 (f) => Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  padding:  EdgeInsets.symmetric(vertical: 4.h),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Image.asset("assets/images/select_icon_2.png", width: 30),
-                      const SizedBox(width: 20),
+                      Image.asset("assets/images/select_icon_2.png", width: 30.w),
+                      SizedBox(width: 20.w),
                       Expanded(
                         child: Text(
                           f,
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontFamily: 'Fredoka',
                             color: Color(0xFF003384),
                           ),

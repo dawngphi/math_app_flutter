@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../blocs/user_profile_bloc/profile_event.dart';
 import 'age_item.dart';
@@ -51,7 +52,7 @@ class CreateProfileAgePageState extends State<CreateProfileAgePage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: ButtonNext(title: "Next", onPressed: _onNextPressed,),
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+        padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -59,24 +60,24 @@ class CreateProfileAgePageState extends State<CreateProfileAgePage> {
               "Create Profile",
               style: TextStyle(
                 fontFamily: 'Fredoka',
-                fontSize: 36,
+                fontSize: 36.sp,
                 fontWeight: FontWeight.w500,
                 color: Color(0xFF3AAFFF),
               ),
             ),
-            SizedBox(height: 10),
-            Image.asset("assets/images/step_icon_2.png", width: 280),
-            SizedBox(height: 20),
+            SizedBox(height: 10.h),
+            Image.asset("assets/images/step_icon_2.png", width: 280.w),
+            SizedBox(height: 20.h),
             Text(
               "Your Age",
               style: TextStyle(
                 fontFamily: 'Fredoka',
-                fontSize: 36,
+                fontSize: 36.sp,
                 fontWeight: FontWeight.w500,
                 color: Color(0xFF3AAFFF),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 20.h),
             Expanded(
               child: AgeItem(
                 ageRanges: ageRanges,

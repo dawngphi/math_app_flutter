@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:math_app/src/pages/create_profile_pages/button_next.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../blocs/user_profile_bloc/profile_event.dart';
@@ -34,7 +35,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
       floatingActionButton: ButtonNext(title: "Next", onPressed: _onNextPressed,),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -42,32 +43,32 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
                 "Create Profile",
                 style: TextStyle(
                   fontFamily: 'Fredoka',
-                  fontSize: 36,
+                  fontSize: 36.sp,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF3AAFFF),
                 ),
               ),
-              SizedBox(height: 10),
-              Image.asset("assets/images/step_icon.png", width: 280),
-              SizedBox(height: 30),
-              Image.asset("assets/images/image_math.png"),
-              SizedBox(height: 40),
+              SizedBox(height: 10.h),
+              Image.asset("assets/images/step_icon.png", width: 280.w),
+              SizedBox(height: 30.h),
+              Image.asset("assets/images/image_math.png", width: 300.w ),
+              SizedBox(height: 40.h),
               Text(
                 "Your Gender",
                 style: TextStyle(
                   fontFamily: 'Fredoka',
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.w500,
                   color: Color(0xFF003384),
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GenderItem(
                     color: Color(0xFF3AAFFF),
-                    icon: Image.asset("assets/images/boy_icon.png", width: 25),
+                    icon: Image.asset("assets/images/boy_icon.png", width: 25.w),
                     label: "Boy",
                     selected: selectedGender == "boy",
                     onTap: () {
@@ -81,7 +82,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
                   ),
                   GenderItem(
                     color: Color(0xFFFF86E9),
-                    icon: Image.asset("assets/images/girl_icon.png", width: 25),
+                    icon: Image.asset("assets/images/girl_icon.png", width: 25.w),
                     label: "Girl",
                     selected: selectedGender == "girl",
                     onTap: () {

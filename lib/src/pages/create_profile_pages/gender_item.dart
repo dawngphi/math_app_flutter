@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GenderItem extends StatefulWidget {
   final String label;
@@ -30,9 +31,9 @@ class GenderItemState extends State<GenderItem> {
           style: ElevatedButton.styleFrom(
             backgroundColor: widget.color,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(32.r),
             ),
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 8),
+            padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 8.h),
             elevation: 8,
             shadowColor: Colors.black.withValues(alpha: 0.5),
           ),
@@ -41,17 +42,16 @@ class GenderItemState extends State<GenderItem> {
             mainAxisSize: MainAxisSize.min,
             children: [
               widget.icon,
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               Text(
                 widget.label,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Fredoka',
                   color: Colors.white,
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              if (widget.selected) const SizedBox(width: 24),
             ],
           ),
         ),
@@ -65,15 +65,15 @@ class GenderItemState extends State<GenderItem> {
               children: [
                 // Notch (white circle)
                 Container(
-                  width: 25,
-                  height: 25,
+                  width: 25.w,
+                  height: 25.h,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     shape: BoxShape.circle,
                   ),
                 ),
                 // Check icon
-                Image.asset("assets/images/select_icon.png", width: 15,)
+                Image.asset("assets/images/select_icon.png", width: 15.w,)
               ],
             ),
           ),

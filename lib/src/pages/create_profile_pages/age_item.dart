@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AgeItem extends StatelessWidget {
   final List<String> ageRanges;
@@ -16,6 +17,7 @@ class AgeItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      padding: EdgeInsets.only(bottom: 80.h),
       itemCount: ageRanges.length,
       itemBuilder: (context, index) {
         final age = ageRanges[index];
@@ -23,13 +25,13 @@ class AgeItem extends StatelessWidget {
         return GestureDetector(
           onTap: () => onSelected(age),
           child: Container(
-            margin: EdgeInsets.only(bottom: 15),
-            padding: EdgeInsets.symmetric(vertical: 16),
+            margin: EdgeInsets.only(bottom: 15.w),
+            padding: EdgeInsets.symmetric(vertical: 16.w),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
+              borderRadius: BorderRadius.circular(12.r),
               border: Border.all(
                 color: isSelected ? Color(0xFF3AAFFF) : Color(0xFFC4C4C4),
-                width: 2,
+                width: 2.w,
               ),
               color: isSelected ? Color(0xFF3AAFFF).withValues(alpha: 0.1) : Colors.white,
             ),
@@ -38,7 +40,7 @@ class AgeItem extends StatelessWidget {
                 age,
                 style: TextStyle(
                   fontFamily: 'Fredoka',
-                  fontSize: 20,
+                  fontSize: 20.sp,
                   color: isSelected ? Color(0xFF3AAFFF) : Color(0xFF003384),
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),

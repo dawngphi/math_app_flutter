@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../database/user_database.dart';
 import '../../models/user_profile_model.dart';
@@ -42,11 +43,11 @@ class _CreateProfileSplashPageState extends State<CreateProfileSplashPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/gifs/app_jo.gif", width: 160, height: 160),
+            Image.asset("assets/gifs/app_jo.gif", width: 160.w, height: 160.h),
             Text(
               "The app is personalizing for you...",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontFamily: 'Fredoka',
                 color: Color(0xFF003384),
               ),
