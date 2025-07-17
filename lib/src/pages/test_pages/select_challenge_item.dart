@@ -15,14 +15,14 @@ class SelectChallengeItem extends StatelessWidget {
           Row(
             children: [
               Container(
-                width: 5.w,
-                height: 20.h,
+                width: 4.w,
+                height: 28.h,
                 decoration: BoxDecoration(
                   color: Color(0xFF42A5F5),
-                  borderRadius: BorderRadius.circular(4.r),
+                  borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
-              SizedBox(width: 10),
+              SizedBox(width: 30),
               Text("Select Challenge", style: TextStyle(fontSize: 20.sp, fontFamily: 'Fredoka'),)
             ],
           ),
