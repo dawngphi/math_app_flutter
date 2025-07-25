@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../database/user_database.dart';
 import '../../models/user_profile_model.dart';
+import '../../routes/routes.dart';
 import '../splash_pages/splash_page.dart';
 
 class CreateProfileSplashPage extends StatefulWidget {
@@ -20,9 +22,7 @@ class _CreateProfileSplashPageState extends State<CreateProfileSplashPage> {
     _saveUserProfile();
     Future.delayed(Duration(seconds: 5), () {
       if (mounted) {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => SplashPage()),
-        );
+        Navigator.pushNamed(context, AppRoutes.splash);
       }
     });
   }
@@ -45,7 +45,7 @@ class _CreateProfileSplashPageState extends State<CreateProfileSplashPage> {
           children: [
             Image.asset("assets/gifs/app_jo.gif", width: 160.w, height: 160.h),
             Text(
-              "The app is personalizing for you...",
+              AppLocalizations.of(context)!.personalizing,
               style: TextStyle(
                 fontSize: 20.sp,
                 fontFamily: 'Fredoka',

@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../blocs/user_profile_bloc/profile_event.dart';
 import '../../blocs/user_profile_bloc/profile_state.dart';
+import '../../routes/routes.dart';
 import 'button_next.dart';
 import 'create_profile_splash_page.dart';
 
 class CreateProfileNotifyPage extends StatelessWidget {
   void _onNextPressed(BuildContext context) {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => CreateProfileSplashPage(),
-      ),
-    );
+    Navigator.pushNamed(context, AppRoutes.createProfileSplash);
   }
   @override
   Widget build(BuildContext context) {
     final features = [
-      'Reminders to learn: Kids stay on track.',
-      'Progress updates: Track grades, skills.',
-      'Useful information: Get updates, offers.',
-      'Motivation to learn: Rewards, fun activities.',
+      AppLocalizations.of(context)!.reminders,
+      AppLocalizations.of(context)!.progressupdates,
+      AppLocalizations.of(context)!.usefulinformation,
+      AppLocalizations.of(context)!.motivation,
     ];
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -44,7 +42,7 @@ class CreateProfileNotifyPage extends StatelessWidget {
                   _onNextPressed(context);
                 },
                 child: Text(
-                  "Skips this now",
+                  AppLocalizations.of(context)!.next,
                   style: TextStyle(
                     fontFamily: 'Fredoka',
                     fontSize: 20.sp,
@@ -64,7 +62,7 @@ class CreateProfileNotifyPage extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                "Create Profile",
+                AppLocalizations.of(context)!.createprofile,
                 style: TextStyle(
                   fontFamily: 'Fredoka',
                   fontSize: 36.sp,
@@ -78,7 +76,7 @@ class CreateProfileNotifyPage extends StatelessWidget {
               Image.asset("assets/images/image_math_2.png"),
               SizedBox(height: 40.h),
               Text(
-                "Notifications",
+                AppLocalizations.of(context)!.notifications,
                 style: TextStyle(
                   fontFamily: 'Fredoka',
                   fontSize: 24.sp,

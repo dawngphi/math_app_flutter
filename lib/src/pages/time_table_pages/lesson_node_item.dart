@@ -7,7 +7,8 @@ class LessonNodeItem extends StatefulWidget {
   final LessonNode lesson;
   final bool zigzag;
 
-  LessonNodeItem({super.key, required this.lesson, this.zigzag = true});
+
+  LessonNodeItem({super.key, required this.lesson, this.zigzag = true, });
 
   @override
   State<StatefulWidget> createState() => LessonNodeItemState();

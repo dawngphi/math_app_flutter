@@ -3,10 +3,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DifficultyItem extends StatelessWidget {
   final String title;
-  final int number1;
-  final int number2;
+  final int minValue;
+  final int maxValue;
+  final ValueChanged<int> onMinChanged;
+  final ValueChanged<int> onMaxChanged;
 
-  DifficultyItem({super.key, required this.title, required this.number1, required this.number2});
+  const DifficultyItem({
+    Key? key,
+    required this.title,
+    required this.minValue,
+    required this.maxValue,
+    required this.onMinChanged,
+    required this.onMaxChanged,
+  }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +46,7 @@ class DifficultyItem extends StatelessWidget {
          Row(
            mainAxisAlignment: MainAxisAlignment.spaceBetween,
            children: [
-             Container(
-               width: 122.w,
-                    padding: EdgeInsets.all(15),
-                 decoration: BoxDecoration(
-                   borderRadius: BorderRadius.circular(4.r),
-                   border: Border.all(width: 1.w, color: Colors.black)
-                 ),
-                 child: Center(child: Text(number1.toString(), style: TextStyle(fontSize: 24.sp, color: Color(0xFF007396)),)),
-               ),
+             _buildNumberBox(minValue, onMinChanged),
               Container(
                 width: 15.w,
                 height: 4.h,
@@ -53,19 +55,35 @@ class DifficultyItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8)
                 ),
               ),
-             Container(
-                width: 122.w,
-                 padding: EdgeInsets.all(15),
-                 decoration: BoxDecoration(
-                     borderRadius: BorderRadius.circular(4.r),
-                     border: Border.all(width: 1.w, color: Colors.black)
-                 ),
-                 child: Center(child: Text(number2.toString(), style: TextStyle(fontSize: 24.sp, color: Color(0xFF007396)),)),
-               ),
+             _buildNumberBox(maxValue, onMaxChanged),
+
            ],
          )
        ],
      ),
    );
+  }
+  Widget _buildNumberBox(int value, ValueChanged<int> onChanged) {
+    return Container(
+      width: 122.w,
+      padding: EdgeInsets.all(15),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(4.r),
+          border: Border.all(width: 1.w, color: Colors.black)
+      ),
+      child: Center(
+        child: TextFormField(
+          initialValue: value.toString(),
+          keyboardType: TextInputType.number,
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 24.sp, color: Color(0xFF007396)),
+          decoration: InputDecoration(border: InputBorder.none),
+          onChanged: (val) {
+            final v = int.tryParse(val) ?? value;
+            onChanged(v);
+          },
+        ),
+      ),
+    );
   }
 }

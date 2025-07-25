@@ -1,16 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../models/question_models/question_model.dart';
+
 class DuelPage2Item extends StatefulWidget {
   final Color color;
+  final QuestionModel question;
+  final List<int> answers;
+  final void Function(int) onAnswer;
+  final int score;
+  final int? selectedAnswer;
+  final int correctAnswer;
+  final int timeLeft;
+  final int maxTime;
 
-  const DuelPage2Item({super.key, required this.color});
+  const DuelPage2Item({
+    super.key,
+    required this.color,
+    required this.question,
+    required this.answers,
+    required this.onAnswer,
+    required this.score,
+    required this.selectedAnswer,
+    required this.correctAnswer,
+    required this.timeLeft,
+    required this.maxTime,
+  });
+
   @override
   State<StatefulWidget> createState() => DuelPage2ItemState();
-
 }
 
 class DuelPage2ItemState extends State<DuelPage2Item> {
+  Color _getAnswerColor(int ans) {
+    if (widget.selectedAnswer == null) return widget.color;
+    if (ans == widget.correctAnswer && widget.selectedAnswer == ans) {
+      return Colors.green;
+    }
+    if (widget.selectedAnswer == ans && ans != widget.correctAnswer) {
+      return Colors.red;
+    }
+    return widget.color;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,13 +57,13 @@ class DuelPage2ItemState extends State<DuelPage2Item> {
           child: Stack(
             children: [
               FractionallySizedBox(
-                widthFactor: 0.5, // phần trăm (0.0 - 1.0)
+                widthFactor: 0.5,
                 child: Container(
                   decoration: BoxDecoration(
                     color: widget.color,
                     borderRadius: BorderRadius.circular(10.r),
                   ),
-                  child: Center(child: Text("5", style: TextStyle(color: Colors.white, fontFamily: 'Fredoka', fontSize: 12.sp),)),
+                  child: Center(child: Text("${widget.score}", style: TextStyle(color: Colors.white, fontFamily: 'Fredoka', fontSize: 12.sp),)),
                 ),
               ),
             ],
@@ -43,7 +75,7 @@ class DuelPage2ItemState extends State<DuelPage2Item> {
             Flexible(
               flex: 3,
               child: Text(
-                '2 × 10 = ?',
+                "${widget.question.number1} ${widget.question.operation} ${widget.question.number2} = ?",
                 style: TextStyle(
                   fontSize: 48.sp,
                   fontFamily: 'Fredoka',
@@ -55,11 +87,23 @@ class DuelPage2ItemState extends State<DuelPage2Item> {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: Container(
-                  width: 6.w,
+                  width: 10.w,
                   height: 60.h,
                   decoration: BoxDecoration(
-                    color: Colors.red,
                     borderRadius: BorderRadius.circular(4.r),
+                  ),
+                  child: Stack(
+                    children: [
+                      FractionallySizedBox(
+                        heightFactor: widget.timeLeft / widget.maxTime,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -74,18 +118,29 @@ class DuelPage2ItemState extends State<DuelPage2Item> {
             crossAxisSpacing: 16.w,
             childAspectRatio: 3,
             physics: NeverScrollableScrollPhysics(),
-            children: [
-              _AnswerBox(text: '20', color: widget.color,),
-              _AnswerBox(text: '30', color: widget.color,),
-              _AnswerBox(text: '40', color: widget.color,),
-              _AnswerBox(text: '50', color: widget.color,),
-            ],
+            children: widget.answers.map((ans) => GestureDetector(
+              onTap: widget.selectedAnswer == null ? () => widget.onAnswer(ans) : null,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: _getAnswerColor(ans),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                alignment: Alignment.center,
+                child: Text(
+                  "$ans",
+                  style: TextStyle(
+                    fontSize: 40.sp,
+                    color: Colors.white,
+                    fontFamily: 'Fredoka',
+                  ),
+                ),
+              ),
+            )).toList(),
           ),
         ),
       ],
     );
   }
-
 }
 
 class _AnswerBox extends StatelessWidget {

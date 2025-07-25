@@ -40,6 +40,11 @@ dependencies:
   sqflite: ^2.4.2
   path: ^1.8.0
   flutter_screenutil: ^5.9.3
+  shared_preferences: ^2.5.3
+  level_map: 0.1.4
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +63,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true
   assets:
     - assets/images/
     - assets/gifs/

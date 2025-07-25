@@ -1,0 +1,20 @@
+{
+    "createprofile": "Create Profile",
+    "gender": "Your Gender",
+    "boy": "Boy",
+    "girl": "Girl",
+    "next": "Next",
+    "age": "Your Age",
+    "notifications": "Notifications",
+    "reminders": "Reminders to learn: Kids stay on track.",
+    "progressupdates": "Progress updates: Track grades, skills.",
+    "usefulinformation": "Useful information: Get updates, offers.",
+    "motivation": "Motivation to learn: Rewards, fun activities.",
+    "skips": "Skips this now",
+    "timestables": "Times Tables",
+     "duel": "Duel",
+     "test": "Test",
+     "personalizing": "The app is personalizing for you...",
+     "loading": "Loading..."
+
+}

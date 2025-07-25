@@ -4,9 +4,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TimeTestItem extends StatelessWidget {
   final String title;
-  final double time;
+  final int time;
+  final ValueChanged<int> onTimeChanged;
 
-  TimeTestItem({required this.title, required this.time});
+  const TimeTestItem({
+    Key? key,
+    required this.title,
+    required this.time,
+    required this.onTimeChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +49,19 @@ class TimeTestItem extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4.r),
                     border: Border.all(width: 1.w, color: Colors.black)
                 ),
-                child: Center(child: Text(time.toString(), style: TextStyle(fontSize: 24.sp, color: Color(0xFF007396)),)),
+                child: Center(
+                  child: TextFormField(
+                    initialValue: time.toString(),
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 24.sp, color: Color(0xFF007396)),
+                    decoration: InputDecoration(border: InputBorder.none),
+                    onChanged: (val) {
+                      final v = int.tryParse(val) ?? time;
+                      onTimeChanged(v > 60 ? 60 : v);
+                    },
+                  ),
+                ),
               ),
               SizedBox(width: 15.sp),
               Text("s", style: TextStyle(fontSize: 32.sp, color: Colors.black, fontWeight: FontWeight.w600),)

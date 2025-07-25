@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:math_app/l10n/app_localizations.dart';
 import 'package:math_app/src/pages/create_profile_pages/button_next.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../blocs/user_profile_bloc/profile_event.dart';
+import '../../routes/routes.dart';
 import 'create_profile_age_page.dart';
 import 'gender_item.dart';
 
@@ -17,11 +19,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
   String? selectedGender;
   void _onNextPressed() {
     if (selectedGender != null) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => CreateProfileAgePage(),
-        ),
-      );
+      Navigator.pushNamed(context, AppRoutes.createProfileAge);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please select your gender!')),
@@ -32,7 +30,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: ButtonNext(title: "Next", onPressed: _onNextPressed,),
+      floatingActionButton: ButtonNext(title: AppLocalizations.of(context)!.next, onPressed: _onNextPressed,),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
@@ -40,7 +38,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                "Create Profile",
+                AppLocalizations.of(context)!.createprofile,
                 style: TextStyle(
                   fontFamily: 'Fredoka',
                   fontSize: 36.sp,
@@ -54,7 +52,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
               Image.asset("assets/images/image_math.png", width: 300.w ),
               SizedBox(height: 40.h),
               Text(
-                "Your Gender",
+                AppLocalizations.of(context)!.gender,
                 style: TextStyle(
                   fontFamily: 'Fredoka',
                   fontSize: 24.sp,
@@ -69,7 +67,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
                   GenderItem(
                     color: Color(0xFF3AAFFF),
                     icon: Image.asset("assets/images/boy_icon.png", width: 25.w),
-                    label: "Boy",
+                    label:AppLocalizations.of(context)!.boy,
                     selected: selectedGender == "boy",
                     onTap: () {
                       setState(() {
@@ -83,7 +81,7 @@ class _CreateProfileGenderPageState extends State<CreateProfileGenderPage> {
                   GenderItem(
                     color: Color(0xFFFF86E9),
                     icon: Image.asset("assets/images/girl_icon.png", width: 25.w),
-                    label: "Girl",
+                    label: AppLocalizations.of(context)!.girl,
                     selected: selectedGender == "girl",
                     onTap: () {
                       setState(() {

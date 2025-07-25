@@ -1,0 +1,19 @@
+{
+    "createprofile": "Tạo Hồ Sơ",
+    "gender": "Giới tính",
+    "boy": "nam",
+    "girl": "nữ",
+    "next": "Tiếp tục",
+    "age": "Tuổi",
+    "notifications": "Thông báo",
+    "reminders" : "Lời nhắc nhở: Trẻ em phải đi đúng hướng.",
+    "progressupdates": "Cập nhật tiến độ: Theo dõi điểm số, kỹ năng.",
+    "usefulinformation": "Thông tin hữu ích: Nhận thông tin cập nhật, ưu đãi.",
+    "motivation": "Động lực: Phần thưởng, hoạt động vui chơi.",
+    "skips": "Bỏ qua điều này",
+    "timestables": "Bảng cửu chương",
+    "duel": "Đấu đôi",
+    "test": "Kiểm tra",
+    "personalizing": "Ứng dụng đang cá nhân hóa...",
+    "loading": "Đang tải..."
+}

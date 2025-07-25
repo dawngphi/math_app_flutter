@@ -21,7 +21,7 @@ class UserDatabase {
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 3,
       onCreate: _createDB,
     );
   }
@@ -32,12 +32,41 @@ class UserDatabase {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       gender TEXT NOT NULL,
       age_range TEXT NOT NULL,
-      notifications_enabled INTEGER NOT NULL
+      notifications_enabled INTEGER NOT NULL,
+      lives INTEGER NOT NULL
     )
   ''');
   }
   Future<int> createUser(UserProfileModel user) async {
     final db = await instance.database;
     return await db.insert('user_profile', user.toMap());
+  }
+  Future<UserProfileModel?> getFirstUser() async {
+    final db = await instance.database;
+    final maps = await db.query('user_profile', limit: 1);
+    if (maps.isNotEmpty) {
+      return UserProfileModel.fromMap(maps.first);
+    }
+    return null;
+  }
+  Future<int> updateLives(int userId, int newLives) async {
+    final db = await instance.database;
+    return await db.update(
+      'user_profile',
+      {'lives': newLives},
+      where: 'id = ?',
+      whereArgs: [userId],
+    );
+  }
+
+  Future<UserProfileModel?> getUserById(int userId) async {
+    final db = await instance.database;
+    final maps = await db.query('users', where: 'id = ?', whereArgs: [userId]);
+
+    if (maps.isNotEmpty) {
+      return UserProfileModel.fromMap(maps.first);
+    } else {
+      return null;
+    }
   }
 }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
 import '../../blocs/user_profile_bloc/profile_event.dart';
+import '../../routes/routes.dart';
 import 'age_item.dart';
 import 'button_next.dart';
 import 'create_profile_notify_page.dart';
@@ -34,11 +36,7 @@ class CreateProfileAgePageState extends State<CreateProfileAgePage> {
   }
   void _onNextPressed() {
     if (selectedAge != null) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => CreateProfileNotifyPage(),
-        ),
-      );
+      Navigator.pushNamed(context, AppRoutes.createProfileNotify);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Please select your age!')),
@@ -50,14 +48,14 @@ class CreateProfileAgePageState extends State<CreateProfileAgePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: ButtonNext(title: "Next", onPressed: _onNextPressed,),
+      floatingActionButton: ButtonNext(title: AppLocalizations.of(context)!.next, onPressed: _onNextPressed,),
       body: Padding(
         padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "Create Profile",
+              AppLocalizations.of(context)!.createprofile,
               style: TextStyle(
                 fontFamily: 'Fredoka',
                 fontSize: 36.sp,
@@ -69,7 +67,7 @@ class CreateProfileAgePageState extends State<CreateProfileAgePage> {
             Image.asset("assets/images/step_icon_2.png", width: 280.w),
             SizedBox(height: 20.h),
             Text(
-              "Your Age",
+              AppLocalizations.of(context)!.age,
               style: TextStyle(
                 fontFamily: 'Fredoka',
                 fontSize: 36.sp,

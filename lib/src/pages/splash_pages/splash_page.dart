@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:stroke_text/stroke_text.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:math_app/src/pages/home_pages/home_page.dart'; // Đảm bảo import đúng đường dẫn
+import 'package:math_app/src/pages/home_pages/home_page.dart';
+
+import '../../../l10n/app_localizations.dart'; // Đảm bảo import đúng đường dẫn
 
 class SplashPage extends StatefulWidget {
   @override
@@ -57,7 +59,7 @@ class _SplashPageState extends State<SplashPage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     StrokeText(
-                      text: "Loading...",
+                      text: AppLocalizations.of(context)!.loading,
                       textAlign: TextAlign.center,
                       textStyle: TextStyle(
                         fontSize: 32.sp,
