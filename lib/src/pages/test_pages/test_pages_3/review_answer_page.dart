@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AnswerReview {
-  final String questionText;
-  final int userAnswer;
-  final int correctAnswer;
-  AnswerReview({
-    required this.questionText,
-    required this.userAnswer,
-    required this.correctAnswer,
-  });
-}
+import '../../../blocs/test_session_bloc/test_session_state.dart';
+
 
 class ReviewAnswerPage extends StatelessWidget {
   final List<AnswerReview> answerReviews;

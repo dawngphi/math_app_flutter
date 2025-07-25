@@ -31,14 +31,7 @@ class HomePageState extends State<HomePage> {
 
     final userId = context.read<ProfileBloc>().state.id;
 
-    if (userId != null) {
-      // Nếu đã có ID thì load user theo ID
-      UserDatabase.instance.getUserById(userId).then((user) {
-        if (user != null) {
-          context.read<ProfileBloc>().add(LoadUserProfile(user));
-        }
-      });
-    } else {
+    if (userId == null) {
       // Nếu chưa có ID thì load user đầu tiên
       UserDatabase.instance.getFirstUser().then((user) {
         if (user != null) {

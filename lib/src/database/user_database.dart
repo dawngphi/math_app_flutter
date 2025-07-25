@@ -61,7 +61,7 @@ class UserDatabase {
 
   Future<UserProfileModel?> getUserById(int userId) async {
     final db = await instance.database;
-    final maps = await db.query('users', where: 'id = ?', whereArgs: [userId]);
+    final maps = await db.query('user_profile', where: 'id = ?', whereArgs: [userId]);
 
     if (maps.isNotEmpty) {
       return UserProfileModel.fromMap(maps.first);

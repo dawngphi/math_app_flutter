@@ -73,11 +73,16 @@ class AnswerBoxItemState extends State<AnswerBoxItem> {
                   counterText: "",
                 ),
                 onChanged: (val) {
-                  if (val.length == 1 && i < 2) {
-                    focusNodes[i + 1].requestFocus();
-                  }
                   if (val.isEmpty && i > 0) {
+                    // Nếu ô hiện tại rỗng, chuyển focus về ô trước
                     focusNodes[i - 1].requestFocus();
+                    // Xóa ký tự ở ô trước nếu có
+                    if (controllers[i - 1].text.isNotEmpty) {
+                      controllers[i - 1].clear();
+                    }
+                  } else if (val.length == 1 && i < 2) {
+                    // Nếu nhập đủ 1 ký tự, chuyển focus sang ô tiếp theo
+                    focusNodes[i + 1].requestFocus();
                   }
                   _onChanged();
                 },
