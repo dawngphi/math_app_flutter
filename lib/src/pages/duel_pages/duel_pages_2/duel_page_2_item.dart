@@ -75,7 +75,7 @@ class DuelPage2ItemState extends State<DuelPage2Item> {
             Flexible(
               flex: 3,
               child: Text(
-                "${widget.question.number1} ${widget.question.operation} ${widget.question.number2} = ?",
+                "${widget.question.number1} ${widget.question.operationSymbol} ${widget.question.number2} = ?",
                 style: TextStyle(
                   fontSize: 48.sp,
                   fontFamily: 'Fredoka',

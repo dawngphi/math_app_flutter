@@ -11,7 +11,7 @@ import 'package:math_app/src/pages/test_pages/test_pages_2/test_page_2.dart';
 import '../../blocs/test_session_bloc/test_session_bloc.dart';
 import '../../blocs/test_session_bloc/test_session_event.dart';
 import '../../blocs/user_profile_bloc/profile_bloc.dart';
-import '../../models/question_models/logic_question.dart';
+import '../../models/question_models/question_model.dart';
 import '../create_profile_pages/button_next.dart';
 
 class TestPage extends StatelessWidget {

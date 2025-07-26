@@ -35,7 +35,7 @@ class TestSessionBloc extends Bloc<TestSessionEvent, TestSessionState>{
 
     final question = state.currentQuestion!;
     final isCorrect = event.answer == question.answer;
-    final questionText = "${question.number1}${question.operation}${question.number2}";
+    final questionText = "${question.number1}${question.operationSymbol}${question.number2}";
 
     final newAnswerReviews = List<AnswerReview>.from(state.answerReviews)
       ..add(AnswerReview(
@@ -76,7 +76,6 @@ class TestSessionBloc extends Bloc<TestSessionEvent, TestSessionState>{
       answerReviews: newAnswerReviews,
     ));
 
-    // Đảm bảo await và kiểm tra emit.isDone
     await Future.delayed(const Duration(seconds: 1));
     if (!emit.isDone) add(NextQuestion());
   }
@@ -85,7 +84,7 @@ class TestSessionBloc extends Bloc<TestSessionEvent, TestSessionState>{
     if (!state.isActive || state.currentQuestion == null) return;
 
     final question = state.currentQuestion!;
-    final questionText = "${question.number1}${question.operation}${question.number2}";
+    final questionText = "${question.number1}${question.operationSymbol}${question.number2}";
 
     final newAnswerReviews = List<AnswerReview>.from(state.answerReviews)
       ..add(AnswerReview(
@@ -116,12 +115,12 @@ class TestSessionBloc extends Bloc<TestSessionEvent, TestSessionState>{
     final nextIndex = state.currentQuestionIndex + 1;
     emit(state.copyWith(
       currentQuestionIndex: nextIndex,
-      timeLeft: state.questions.isNotEmpty ? 10 : 0, // Reset time
+      timeLeft: state.questions.isNotEmpty ? state.maxTimePerQuestion : 0, // Reset time to maxTimePerQuestion
       resultMessage: null,
     ));
 
     if (state.questions.isNotEmpty) {
-      _startTimer(state.questions.isNotEmpty ? 10 : 0, emit);
+      _startTimer(state.questions.isNotEmpty ? state.maxTimePerQuestion : 0, emit);
     }
   }
 
@@ -137,7 +136,6 @@ class TestSessionBloc extends Bloc<TestSessionEvent, TestSessionState>{
         timer.cancel();
         add(TimeoutQuestion());
       } else {
-        // add một event mới, ví dụ Tick
         add(Tick());
       }
     });

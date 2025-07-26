@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:math_app/src/pages/duel_pages/duel_pages_2/duel_page_2.dart';
 
-import '../../models/question_models/logic_question.dart';
+import '../../models/question_models/question_model.dart';
 import '../create_profile_pages/button_next.dart';
 import '../test_pages/difficulty_item.dart';
 import '../test_pages/select_challenge_item.dart';

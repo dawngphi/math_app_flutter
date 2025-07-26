@@ -88,15 +88,7 @@ class DuelPage2State extends State<DuelPage2> {
   }
 
   List<int> getShuffledAnswers(QuestionModel q) {
-    final rand = Random();
-    final answers = <int>{q.answer};
-    while (answers.length < 4) {
-      int delta = rand.nextInt(10) + 1;
-      int fake = q.answer + (rand.nextBool() ? delta : -delta);
-      if (fake != q.answer && fake > 0) answers.add(fake);
-    }
-    final list = answers.toList()..shuffle();
-    return list;
+    return q.getShuffledAnswers();
   }
 
   void _onAnswer(int player, int answer) {

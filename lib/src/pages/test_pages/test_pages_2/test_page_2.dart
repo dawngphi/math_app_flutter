@@ -41,8 +41,8 @@ class _TestPage2State extends State<TestPage2> {
       });
       lastQuestionIndex = testState.currentQuestionIndex;
     }
-    // Khi lives tăng, cập nhật vào ProfileBloc
-    if (lastLives != null && testState.lives > lastLives!) {
+    // Khi lives thay đổi (tăng hoặc giảm), cập nhật vào ProfileBloc
+    if (lastLives != null && testState.lives != lastLives!) {
       final userId = profileState.id;
       if (userId != null) {
         context.read<ProfileBloc>().add(UpdateLives(userId, testState.lives));
@@ -77,12 +77,11 @@ class _TestPage2State extends State<TestPage2> {
 
 
     return Scaffold(
-      appBar: _buildAppBar(
-        testState.lives,
-        testState.timeLeft,
-        testState.maxTimePerQuestion,
-        testState.questions.length,
-        testState.currentQuestionIndex,),
+      appBar: QuizAppBar(
+        lives: testState.lives,
+        timeLeft: testState.timeLeft,
+        maxTimePerQuestion: testState.maxTimePerQuestion,
+        ),
       body: Stack(
         alignment: Alignment.center,
         children: [
@@ -91,7 +90,7 @@ class _TestPage2State extends State<TestPage2> {
               QuestionAreaItem(
                 number1: q.number1,
                 number2: q.number2,
-                operation: q.operation,
+                operation: q.operationSymbol,
               ),
               AnswerBoxItem(
                 key: answerBoxKey,
@@ -135,9 +134,70 @@ class _TestPage2State extends State<TestPage2> {
       ),
     );
   }
+}
 
-  PreferredSizeWidget _buildAppBar(int lives, int timeLeft,int maxTimePerQuestion, int total, int current) {
-    final progress = (timeLeft.toDouble() / maxTimePerQuestion).clamp(0.0, 1.0);
+class QuizAppBar extends StatefulWidget implements PreferredSizeWidget {
+  final int lives;
+  final int timeLeft;
+  final int maxTimePerQuestion;
+
+  const QuizAppBar({
+    Key? key,
+    required this.lives,
+    required this.timeLeft,
+    required this.maxTimePerQuestion,
+  }) : super(key: key);
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
+  @override
+  _QuizAppBarState createState() => _QuizAppBarState();
+}
+
+class _QuizAppBarState extends State<QuizAppBar>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _ctr;
+
+  @override
+  void initState() {
+    super.initState();
+    _ctr = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: widget.maxTimePerQuestion),
+    );
+    _start();
+  }
+
+  @override
+  void didUpdateWidget(covariant QuizAppBar old) {
+    super.didUpdateWidget(old);
+    // Reset timer khi chuyển sang câu hỏi mới (timeLeft được reset về maxTimePerQuestion)
+    if (widget.timeLeft == widget.maxTimePerQuestion &&
+        old.timeLeft != widget.maxTimePerQuestion) {
+      _start();
+    }
+    // Cập nhật duration nếu maxTimePerQuestion thay đổi
+    if (widget.maxTimePerQuestion != old.maxTimePerQuestion) {
+      _ctr.duration = Duration(seconds: widget.maxTimePerQuestion);
+      _start();
+    }
+  }
+
+  void _start() {
+    _ctr
+      ..reset()
+      ..reverse(from: 1.0);
+  }
+
+  @override
+  void dispose() {
+    _ctr.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return AppBar(
       automaticallyImplyLeading: false,
       backgroundColor: const Color(0xFF3AAFFF),
@@ -151,7 +211,7 @@ class _TestPage2State extends State<TestPage2> {
               icon: Image.asset("assets/images/tim_icon.png", width: 30),
             ),
             Text(
-              "x$lives",
+              "x${widget.lives}",
               style: const TextStyle(
                 fontSize: 24,
                 color: Colors.white,
@@ -168,18 +228,20 @@ class _TestPage2State extends State<TestPage2> {
             color: const Color(0xFF4FC3F7),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Stack(
-            children: [
-              FractionallySizedBox(
-                widthFactor: progress,
+          child: AnimatedBuilder(
+            animation: _ctr,
+            builder: (_, __) {
+              return FractionallySizedBox(
+                alignment: Alignment.centerLeft,
+                widthFactor: _ctr.value,
                 child: Container(
                   decoration: BoxDecoration(
                     color: const Color(0xFF424242),
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-              ),
-            ],
+              );
+            },
           ),
         ),
         IconButton(
